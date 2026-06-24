@@ -1,7 +1,8 @@
- import 'package:stacked/stacked.dart';
-import 'package:stackedbasic/app/utils.dart';
+
+import 'package:stacked/stacked.dart';
 
 import '../../app/app.router.dart';
+import '../../app/utils.dart';
 
 class SplashviewModel extends BaseViewModel {
 
@@ -12,13 +13,18 @@ class SplashviewModel extends BaseViewModel {
   }
 
   Future<void> init() async {
-    await  Future.delayed(const Duration(seconds: 4));
-    navigationService.pushNamedAndRemoveUntil(Routes.loginview);
+    await Future.delayed(const Duration(seconds: 4));
+    final user = await userService.getUser();
+    if (user != null && user.access != null) {
+      navigationService.pushNamedAndRemoveUntil(Routes.homeview);
+    } else {
+      navigationService.pushNamedAndRemoveUntil(Routes.loginview);
+    }
   }
 
-  void fetch() {
-    setBusy(true);
-
-    setBusy(false);
-  }
+// void fetch() {
+//   setBusy(true);
+//
+//   setBusy(false);
+// }
 }

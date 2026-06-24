@@ -20,13 +20,14 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: "Stacked",
-      builder: (context, child) {
-        FlutterSmartDialog.init();
-        return MediaQuery(
-          data: MediaQuery.of(context).copyWith(textScaler: const TextScaler.linear(1)),
-          child: child!,
-        );
-      },
+       builder:  FlutterSmartDialog.init( builder: (context, child) {
+
+          return MediaQuery(
+            data: MediaQuery.of(context).copyWith(textScaler: const TextScaler.linear(1)),
+            child: child!,
+          );
+        },),
+
       navigatorKey: StackedService.navigatorKey,
       onGenerateRoute: StackedRouter().onGenerateRoute,
       navigatorObservers: [

@@ -2,6 +2,8 @@
 
 import 'package:logger/logger.dart';
 
+import '../models/User.dart';
+
 class Apiservice
  {
 
@@ -11,7 +13,7 @@ final logger = Logger();
  Apiservice() {
   _dio = Dio(
     BaseOptions(
-      baseUrl: "<>",
+      baseUrl: "https://freeapi.luminartechnohub.com",
       headers: {
         "Accept": "application/json",
         "Content-Type": "application/json",
@@ -40,6 +42,20 @@ final logger = Logger();
     },
   ));
 }
+Future<User?> login({required String email, required String password}) async {
+   try{
+     final response=await _dio.post("/login",data: {
+       "email":email,
+       "password":password,
+     });
+     if(response.statusCode==200){
+       return User.fromJson(response.data);
+     }
+   }on DioException catch(e){
+     logger.e(e.message);
+   }
 
-
+    }
 }
+
+
