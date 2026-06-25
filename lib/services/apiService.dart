@@ -1,7 +1,9 @@
  import 'package:dio/dio.dart';
 
 import 'package:logger/logger.dart';
+import 'package:stackedbasic/models/RespProducts.dart';
 
+import '../app/utils.dart';
 import '../models/User.dart';
 
 class Apiservice
@@ -55,6 +57,56 @@ Future<User?> login({required String email, required String password}) async {
      logger.e(e.message);
    }
 
+    }
+    Future<User?> registration({required String name,required String email,required String password,required String place,required phone,required pincode}) async {
+   try{
+     //
+     // "name": "string",
+     //  "phone": 9223372036854776000,
+     //  "place": "string",
+     //  "pincode": 2147483647,
+     //  "email": "user@example.com",
+     //  "password": "string"
+     final response=await _dio.post("/registration",data: {
+       "name":name,
+       "phone":phone,
+       "pincode":pincode,
+       "email":email,
+       "password":password,
+       "place":place,
+     });
+     if(response.statusCode==200){
+       return User.fromJson(response.data);
+
+
+     }
+   }
+   on DioException catch(e){
+     logger.e(e.message);
+   }
+
+    }
+    Future<List<Products>?> getproductsall() async {
+    try{
+     final response=await _dio.get("/products-all/",
+         options: Options(
+           headers: {"Authorization":"Bearer ${await userService.getAccessKey()}"},
+
+         )  );
+     if(response.statusCode==200){
+       var allproducts=RespProducts.fromJson(response.data);
+       return allproducts.data;
+
+     }
+     var allproducts=RespProducts.fromJson(response.data);
+     return allproducts.data;
+    }
+    on DioException catch(e){
+      logger.e("DioException:${e.message}");
+    }
+    catch(e){
+      logger.e("Error:${e}");
+    }
     }
 }
 
