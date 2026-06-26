@@ -5,6 +5,7 @@ import 'package:stackedbasic/ui/registration/registrationView.dart';
 
 import '../services/apiService.dart';
 import '../services/userservice.dart';
+import '../ui/dashboard/dashboardview.dart';
 import '../ui/login/loginView.dart';
 import '../ui/splash/splashView.dart';
 
@@ -14,6 +15,7 @@ import '../ui/splash/splashView.dart';
     MaterialRoute(page: Loginview),
     MaterialRoute(page: Homeview),
     MaterialRoute(page: Registrationview),
+    MaterialRoute(page: Dashboardview),
 
 
   ],

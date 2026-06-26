@@ -3,6 +3,8 @@ import 'package:stacked/stacked.dart';
 import 'package:stackedbasic/ui/login/loginviewmodel.dart';
 import 'package:stackedbasic/ui/tools/blur_background.dart';
 
+import '../../app/app.router.dart';
+import '../../app/utils.dart';
 import '../../constants/assets.gen.dart';
 
 class Loginview extends StatelessWidget {
@@ -74,7 +76,10 @@ class Loginview extends StatelessWidget {
                                 },
                                 child: Text("Login"),
                               ),
-                            )
+                            ),
+                            TextButton(onPressed: (){
+                              navigationService.navigateToRegistrationview();
+                            }, child: Text("register"))
                           ],
                         ),
                       ),

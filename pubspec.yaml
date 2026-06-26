@@ -41,6 +41,7 @@ dependencies:
   flutter_smart_dialog: ^5.1.0
   google_fonts: ^8.1.0
   flutter_screenutil: ^5.9.3
+  font_awesome_flutter: ^11.0.0
 
 dev_dependencies:
   flutter_test:

@@ -30,7 +30,7 @@ class Loginviewmodel extends BaseViewModel {
           SmartDialog.showToast(
               "Login successful", displayTime: const Duration(seconds: 2),);
           await userService.saveUser(user);
-          navigationService.replaceWith(Routes.homeview);
+          navigationService.replaceWith(Routes.homeview,arguments: HomeviewArguments(id:user.id! ));
         }
         else{
           SmartDialog.showToast("Login Failed...");

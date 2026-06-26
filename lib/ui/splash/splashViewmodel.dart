@@ -16,7 +16,7 @@ class SplashviewModel extends BaseViewModel {
     await Future.delayed(const Duration(seconds: 4));
     final user = await userService.getUser();
     if (user != null && user.access != null) {
-      navigationService.pushNamedAndRemoveUntil(Routes.homeview);
+      navigationService.pushNamedAndRemoveUntil(Routes.homeview,arguments: HomeviewArguments(id:user.id!));
     } else {
       navigationService.pushNamedAndRemoveUntil(Routes.loginview);
     }

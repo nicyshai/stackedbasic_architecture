@@ -8,13 +8,14 @@ import 'homeviewmodel.dart';
 
 
 class Homeview extends StatelessWidget {
-  const Homeview({super.key});
+  num id;
+  Homeview({super.key,required this.id });
 
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<Homeviewmodel>.reactive(
       onViewModelReady: (viewmodel)=>viewmodel.init(),
-      viewModelBuilder: () => Homeviewmodel(),
+      viewModelBuilder: () => Homeviewmodel(id),
       builder: (context, viewModel, child) {
         return Scaffold(
           appBar: AppBar(

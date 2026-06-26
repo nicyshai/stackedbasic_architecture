@@ -10,7 +10,11 @@ import '../../../app/app.router.dart';
 
 class Homeviewmodel extends BaseViewModel {
  List<Products>? plist=[];
- void init(){
+ late num id;
+
+ Homeviewmodel(this.id);
+
+  void init(){
   fetchproducts();
 
  }
