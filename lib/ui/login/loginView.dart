@@ -17,7 +17,7 @@ class Loginview extends StatelessWidget {
       viewModelBuilder: () => Loginviewmodel(),
       builder: (context, viewModel, child) {
         return Scaffold(
-          backgroundColor: Colors.orange.shade200,
+          backgroundColor: Colors.orangeAccent,
           body: SizedBox.expand(
             child: Stack(
 
@@ -27,7 +27,7 @@ class Loginview extends StatelessWidget {
                     margin: EdgeInsets.symmetric(horizontal: 16),
                     child: Container(
                       width: MediaQuery.widthOf(context),
-                      height: 400,
+                      height: 450,
                       padding: EdgeInsets.all(8),
                       child: Form(
                         key: viewModel.formKey,
