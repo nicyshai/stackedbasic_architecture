@@ -30,8 +30,8 @@ class  Databaseservice {
     final data=await _database?.query("task");
     return data!.map((e)=>Task.fromMap(e)).toList();
   }
-  void deleteTask(int id) async {
+  Future<int?> deleteTask(int id) async {
     await initDb();
-    await _database?.delete("task", where: "id=?", whereArgs: [id]);
+    return await _database?.delete("task", where: "id=?", whereArgs: [id]);
   }
   }
