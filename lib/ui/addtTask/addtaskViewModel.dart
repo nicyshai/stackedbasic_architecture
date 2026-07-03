@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:stacked/stacked.dart';
+import 'package:stackedbasic/app/app.router.dart';
 
 import '../../app/utils.dart';
 import '../../models/category.dart';
@@ -13,6 +14,7 @@ class AddTaskViewModel extends BaseViewModel {
   final TextEditingController timeController = TextEditingController();
   final TextEditingController priorityController = TextEditingController();
   final formkey = GlobalKey<FormState>();
+
   int selectedCategoryindex = 0;
   String selectedPriority = "medium";
   DateTime selectedDate = DateTime.now();
@@ -95,7 +97,7 @@ class AddTaskViewModel extends BaseViewModel {
         } else {
           databaseservice.insertTask(task);
         }
-        navigationService.back();
+        navigationService.pushNamedAndRemoveUntil(Routes.dashboardview);
       } catch (e) {
         print(e);
       }
