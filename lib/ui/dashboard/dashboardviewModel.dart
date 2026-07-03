@@ -1,4 +1,6 @@
- import 'package:intl/intl.dart';
+ import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:intl/intl.dart';
 import 'package:stacked/stacked.dart';
 
 import '../../app/utils.dart';
@@ -8,8 +10,31 @@ enum Taskfilter{all,today,upcoming,completed}
 class Dashboardviewmodel extends BaseViewModel {
   List<Task> _alltasks=[];
   List<Task>get alltasks=>_applySearch(_alltasks);
+  List<Task>get todaytasks=>_applySearch(_alltasks.where(_isToday).toList());
+  List<Task>get upcomingtasks=>_applySearch(_alltasks.where(_isUpcoming).toList());
+  List<Task>get completedtasks=>_applySearch(_alltasks.where((task)=>task.iscompleted).toList());
+  List<Category> categories = [
+    Category(catid: 1, catname: "personal", catimage: FontAwesomeIcons.person, color: Colors.red),
+    Category(catid: 2, catname: "Work", catimage: FontAwesomeIcons.upwork, color: Colors.blue),
+    Category(catid: 3, catname: "Study", catimage: FontAwesomeIcons.book, color: Colors.green),
+    Category(catid: 4, catname: "Shopping", catimage: FontAwesomeIcons.cartShopping, color: Colors.purple),
+    Category(catid: 5, catname: "Bills", catimage: FontAwesomeIcons.bilibili, color: Colors.yellow),
+  ];
+
+
+
   Taskfilter selectedFilter=Taskfilter.all;
   String _searchText="";
+
+  //filtedtasks
+  List<Task>get filteredtasks{
+    switch(selectedFilter){
+      case Taskfilter.today:return todaytasks;
+      case Taskfilter.upcoming:return upcomingtasks;
+      case Taskfilter.completed:return completedtasks;
+      default:return alltasks;
+    }
+    }
 
 
 
@@ -40,6 +65,7 @@ List<Task> _applySearch(List<Task> list){
   }
   Future<void> toggleCompletetask(Task task) async {
     if (task.id == null) return;
+    task.iscompleted = !task.iscompleted;
     await databaseservice.updateTask(task);
     loadTasks();
   }

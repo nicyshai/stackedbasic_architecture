@@ -34,7 +34,7 @@ class Task{
     'date':date,
     'time':time,
     'priority':priority,
-    'iscompleted':iscompleted,
+    'iscompleted': iscompleted ? 1 : 0,
   };
   factory Task.fromMap(Map<String,dynamic>map)=>Task(
 id: map["id"],
@@ -44,7 +44,7 @@ catid: map["catid"],
 date: map["date"],
 time: map["time"],
 priority: map["priority"],
-iscompleted: map["iscompleted"],
+iscompleted: map["iscompleted"]==0?false:true,
   );
 
   }
